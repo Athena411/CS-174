@@ -56,6 +56,7 @@ if(isset($_POST['btnLogIn']))
     }
 }
 
+//hallo
 if ($_FILES)
 {
     $name = htmlentities($_FILES[('filename')]['name']);
