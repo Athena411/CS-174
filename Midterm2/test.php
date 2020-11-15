@@ -10,6 +10,8 @@ $loggedIn = false;
 if ($conn->connect_error) 
     die($connection->connect_error);
 
+//From the first page, a user can sign up or log in
+//If the user clicks the log in button and sucessfully logs in, then display upload form and their specific uploaded information.
 if(isset($_POST['btnLogIn']))
 {
     if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']))
@@ -56,7 +58,7 @@ if(isset($_POST['btnLogIn']))
     }
 }
 
-//hallo
+//if a user has uploaded a file and entered a string input, store it into a user inputs database
 if ($_FILES)
 {
     $name = htmlentities($_FILES[('filename')]['name']);
@@ -80,7 +82,8 @@ if ($_FILES)
     }
 }
 
-
+//Only way for a user to click the button in the first place is if they have sucessfull logged in, so we know from this portion, the user if logged in.
+//If the user has press the upload button, show the upload form again and the uploaded information specific to the logged in user
 if(isset($_POST['btnUpload']))
 {
     $user = mysql_entities_fix_string($conn, $_SERVER['PHP_AUTH_USER']); 
@@ -100,7 +103,7 @@ if(isset($_POST['btnUpload']))
     displayUserInputs($conn, $email);
 }
 
-//If a user 
+//If a user created an account from filling in all of the fields, store the users information into a user account database.
 if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']))
 {
     $email = mysql_entities_fix_string($conn, $_POST['email']);
@@ -128,8 +131,6 @@ if($loggedIn == false)
                   <input type='submit' name = 'btnLogIn' value='Log in' style='height:30px; width:80px'>
 _END;
 }
-
-
 
 echo '<br>';
 $conn->close();
