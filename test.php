@@ -9,6 +9,8 @@ $loggedIn = false;
 
 if ($conn->connect_error) 
     die($connection->connect_error);
+    
+
 
 if(isset($_POST['btnLogIn']))
 {
